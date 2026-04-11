@@ -693,10 +693,6 @@ st.markdown(
         backdrop-filter: none;
     }
 
-    [data-testid="stChatInput"] > div > div:last-child > div:first-child {
-        display: none !important;
-    }
-
     [data-testid="stElementContainer"].st-key-chat_prompt {
         background: transparent !important;
         box-shadow: none !important;
@@ -708,6 +704,15 @@ st.markdown(
     [data-testid="stElementContainer"].st-key-chat_prompt > div {
         background: transparent !important;
         box-shadow: none !important;
+    }
+
+    /* Streamlit changes the internal chat input DOM across releases, so avoid hiding
+       positional children. Keep the actual composer visible and style stable. */
+    [data-testid="stChatInput"] form,
+    [data-testid="stChatInput"] [data-baseweb="textarea"],
+    [data-testid="stChatInput"] [data-baseweb="base-input"],
+    [data-testid="stChatInput"] [data-testid="stChatInputTextArea"] {
+        display: flex !important;
     }
 
     [data-testid="stChatInput"] [data-baseweb="textarea"] {
@@ -750,6 +755,7 @@ st.markdown(
 
     [data-testid="stChatInput"] textarea,
     [data-testid="stChatInput"] input {
+        display: block !important;
         color: #f2f2f2 !important;
         background: transparent !important;
         border: none !important;
